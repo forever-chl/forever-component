@@ -1,0 +1,121 @@
+{
+  "id": "1656069",
+  "name": "腾讯会议",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "583122",
+      "name": "加入",
+      "font_class": "76xinzeng",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "626021",
+      "name": "会议纪要",
+      "font_class": "huiyijiyao",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "795513",
+      "name": "视频",
+      "font_class": "ai-video",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "867056",
+      "name": "会议",
+      "font_class": "huiyi",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "1200210",
+      "name": "班级成员",
+      "font_class": "banjichengyuan",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "1374716",
+      "name": "会议中_扬声器",
+      "font_class": "huiyizhong_yangshengqi",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "1903538",
+      "name": "头像 女孩",
+      "font_class": "icon-test",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "1908929",
+      "name": "头像 男孩",
+      "font_class": "icon-test1",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "3791131",
+      "name": "会议室-01",
+      "font_class": "huiyishi-",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "5050195",
+      "name": "成员-添加-填充",
+      "font_class": "chengyuan-tianjia-tianchong",
+      "unicode": "e7f8",
+      "unicode_decimal": 59384
+    },
+    {
+      "icon_id": "5767993",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "5809077",
+      "name": "会议通知",
+      "font_class": "huiyitongzhi",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "6429413",
+      "name": "会议日程",
+      "font_class": "huiyiricheng",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "9749381",
+      "name": "会议安排",
+      "font_class": "meeting-management-arrangements-for-the-meeting",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "10463899",
+      "name": "音频",
+      "font_class": "yinpin",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "11372772",
+      "name": "闪电",
+      "font_class": "shandian",
+      "unicode": "e8c5",
+      "unicode_decimal": 59589
+    }
+  ]
+}
