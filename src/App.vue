@@ -1,41 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <SectorMenu :btnList="btnList" @operateClick="operateClick"/>
+    <meeting></meeting>
   </div>
 </template>
 
 <script>
-import SectorMenu from './components/SectorMenu.vue'
+import Meeting from './components/Meeting.vue'
 
 export default {
   name: 'app',
-  data(){
-    return{
-      btnList: [
-          {
-            text:"审核",
-            item: 1
-          },
-          {
-            text:"提交确认",
-            item: 2
-          },
-          {
-            text:"提交审核",
-            item: 3
-          }
-      ]
-    } 
-  },
   components: {
-    SectorMenu
+    Meeting
   },
-  methods:{
-    operateClick(item){
-      console.log(`operateClick${item}`)
-    }
-  }
 }
 </script>
 
