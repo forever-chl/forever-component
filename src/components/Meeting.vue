@@ -129,7 +129,7 @@
         }
         .video-view,
             #local_stream, #local_video_info {
-                width: 480px;
+                width: 100%;
                 height: 320px; 
             }
             #local_stream{
