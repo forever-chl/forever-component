@@ -11,18 +11,17 @@ module.exports = {
   devServer: {
     open: true,
     disableHostCheck: true,
-    port: 8858
-    // host: '127.0.0.1'
-    // proxy: {
-    //   "/weixin": {
-    //     target: "https://api.weixin.qq.com",
-    //     ws: true,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       "^/weixin/": "/"
-    //     }
-    //   }
-    // }
+    port: 8858,
+    proxy: {
+      "/trtc": {
+        target: "http://192.168.1.53:8088",
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/trtc/": "/trtc/"
+        }
+      }
+    }
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {

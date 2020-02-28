@@ -38,22 +38,22 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (response.status === 200) {
-      if(res.status && res.status === 'SUCCESS'){
+      // if(res.status && res.status === 'SUCCESS'){
+      //   return res
+      // }else if(res.status && res.status === 'SESSIONERROR'){
+      //   Dialog.alert({
+      //     title: "提示",
+      //     message: res.message || "网络异常，请稍后重试"
+      //   })
+      // } else if (res.status && res.status != 'SUCCESS') {
+      //   Dialog.alert({
+      //     title: '提示',
+      //     message: res.message || '网络异常，请稍后重试'
+      //   })
+      //   return Promise.reject()
+      // } else {
         return res
-      }else if(res.status && res.status === 'SESSIONERROR'){
-        Dialog.alert({
-          title: "提示",
-          message: res.message || "网络异常，请稍后重试"
-        })
-      } else if (res.status && res.status != 'SUCCESS') {
-        Dialog.alert({
-          title: '提示',
-          message: res.message || '网络异常，请稍后重试'
-        })
-        return Promise.reject()
-      } else {
-        return res
-      }
+      // }
     } else {
       Dialog.alert({
         title: '错误',

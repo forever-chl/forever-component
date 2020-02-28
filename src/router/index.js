@@ -19,6 +19,18 @@ export default new Router({
       name: "book",
       meta: { title: "预定会议" },
       component: _import("Book/index")
+    },
+    {
+      path: "/detail/:id",
+      name: "detail",
+      meta: { title: "会议详情" },
+      component: _import("Detail/index")
+    },
+    {
+      path: "/meeting/:roomNum",
+      name: "meeting",
+      meta: { title: "会议" },
+      component: _import("Meeting/index")
     }
   ]
 });
