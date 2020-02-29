@@ -294,8 +294,7 @@
             justify-content: center;
             align-items: center;
             input{
-                width:0;
-                flex-grow: 1;
+                width:100%;
                 height:40px;
                 border:solid 1px #f5f5f5;
                 border-radius: 3px;
@@ -315,7 +314,7 @@
                 font-size:16px;
                 color:#333;
             }
-            .roomNum,.meetingTime{
+            .roomNum,.meetTime{
                 font-size: 14px;
                 color:#999;
                 line-height: 28px;
