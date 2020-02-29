@@ -46,7 +46,7 @@
                                 <p class="bookUser">会议主题：{{item.topic}}</p>
                                 <template slot="right">
                                     <van-button square type="danger" text="撤销" @click="deleteMeeting(item.id,key,index)"/>
-                                    <van-button square type="info" text="邀请" />
+                                    <van-button square type="info" text="邀请" @click="toShareMeet(item)"/>
                                 </template>
                             </van-swipe-cell>
                         </li>
@@ -65,6 +65,15 @@
                 <input type="text" v-model="joinMeeting" placeholder="请输入会议室编号">
             </div>
         </van-dialog>
+        <van-dialog v-model="showShare" title="复制二维码分享给朋友" >
+            <div class="content" id="shareContent" ref="shareContent">
+                <div class="qrCode" id="qrCode"></div>
+                <p class="topic">会议主题:{{shareMeet.topic}}</p>
+                <p class="roomNum">会议室编号：{{shareMeet.roomNum}}</p>
+                <p class="meetTime">会议时间：{{shareMeet.startTime ? timeConvert(shareMeet.startTime,1) : ''}}</p>
+            </div>
+            <img class="canvasImg" :src="shareImgUrl">
+        </van-dialog>
     </div>
 </template>
 
@@ -72,6 +81,8 @@
     import { getMeetingList,deleteMeeting, createMeet } from '@/api/common' 
     import { timeConvert, MeetingStatus,dateFormat } from "@/mixins/utils"
     import {List,SwipeCell,Button,Dialog, Toast} from 'vant'
+    import html2canvas from 'html2canvas'
+    import QRCode  from "qrcodejs2"
 
     export default{
         data(){
@@ -83,14 +94,18 @@
                 loading: false,
                 finished: false,
                 showJoin: false,
-                joinMeeting:''
+                joinMeeting:'',
+                shareMeet:{},
+                showShare: false,
+                shareImgUrl: ''
             }
         },
         components:{
             [List.name]:List,
             [Button.name]:Button,
             [SwipeCell.name]:SwipeCell,
-            [Dialog.Component.name]:Dialog.Component
+            [Dialog.Component.name]:Dialog.Component,
+            QRCode
         },
         methods:{
             getDataList(){
@@ -154,6 +169,30 @@
                     }
                 })
             },
+            toShareMeet(item){
+                this.shareMeet = item
+                this.showShare = true
+                setTimeout(() => {
+                    this.$refs.shareContent.style.display = 'flex'
+                    document.querySelector('#qrCode').innerHTML= ''
+                    this.shareImgUrl = ''
+                    this.qrcode(item)
+                },1000)
+            },
+            htmlToCanvas(){
+                html2canvas(document.getElementById('shareContent')).then(canvas => {
+                    this.shareImgUrl = canvas.toDataURL();
+                    this.$refs.shareContent.style.display = 'none'
+                })
+            },
+            qrcode(val) {
+                new QRCode('qrCode', {
+                    width: document.querySelector('#qrCode').clientWidth,
+                    height: document.querySelector('#qrCode').clientHeight,
+                    text: `${window.location.origin}/detail/${val.id}`
+                })
+                this.htmlToCanvas()
+            }
         }
     }
 </script>
@@ -249,11 +288,14 @@
             }
         }
         .content{
-            padding: 20px 0;
+            padding: 20px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             input{
+                width:0;
+                flex-grow: 1;
                 height:40px;
                 border:solid 1px #f5f5f5;
                 border-radius: 3px;
@@ -261,6 +303,28 @@
                 font-size: 16px;
                 color:#333;
                 padding:0 5px;
+            }
+            .qrCode{
+                width:200px;
+                height:200px;
+                background:#ccc;
+                margin:auto;
+            }
+            .topic{
+                margin-top:10px;
+                font-size:16px;
+                color:#333;
+            }
+            .roomNum,.meetingTime{
+                font-size: 14px;
+                color:#999;
+                line-height: 28px;
+            }
+            
+        }
+        .van-dialog{
+            .canvasImg{
+                width:100%;
             }
         }
     }

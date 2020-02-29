@@ -28,18 +28,27 @@
                 <span class="iconfont icon-ai-video" slot="icon"></span>
             </van-grid-item>
             <van-grid-item icon="clear" text="退出会议" @click="leaveMeeting"/>
-            <van-grid-item icon="photo-o" text="邀请成员">
+            <van-grid-item icon="photo-o" text="邀请成员" @click="toShareMeet">
                 <span class="iconfont icon-chengyuan-tianjia-tianchong" slot="icon"></span>
             </van-grid-item>
             <van-grid-item icon="photograph" text="切换摄像头" @click="changeVideo"/>
         </van-grid>
+        <van-dialog v-model="showShare" title="复制二维码分享给朋友" >
+            <div class="content" id="shareContent" ref="shareContent">
+                <div class="qrCode" id="qrCode"></div>
+                <p class="roomNum">会议室编号：{{roomNum}}</p>
+            </div>
+            <img class="canvasImg" :src="shareImgUrl">
+        </van-dialog>
     </div>
 </template>
 
 <script>
-    import {Toast,Grid,GridItem} from 'vant'
+    import {Toast,Grid,GridItem,Dialog} from 'vant'
     import rtcClient from '@/mixins/rtc-client'
     import {getUserSig} from '@/api/common'
+    import html2canvas from 'html2canvas'
+    import QRCode  from "qrcodejs2"
 
     export default{
         props:['roomNum'],
@@ -47,13 +56,17 @@
             return {
                 camera:true,
                 audio:true,
+                shareMeet:{},
+                showShare: false,
+                shareImgUrl: ''
             }
         },
         mixins:[rtcClient],
         components: {
             [Toast.name]:Toast,
             [Grid.name]:Grid,
-            [GridItem.name]:GridItem
+            [GridItem.name]:GridItem,
+            [Dialog.Component.name]:Dialog.Component
         },
         mounted(){
             this.joinMeeting()
@@ -110,7 +123,31 @@
                 if(result){
                     this.audio = true
                 }
-            }
+            },
+            toShareMeet(item){
+                this.showShare = true
+                setTimeout(() => {
+                    this.$refs.shareContent.style.display = 'flex'
+                    document.querySelector('#qrCode').innerHTML= ''
+                    this.shareImgUrl = ''
+                    this.qrcode()
+                },1000)
+            },
+            qrcode() {
+                let _this = this
+                new QRCode('qrCode', {
+                    width: document.querySelector('#qrCode').clientWidth,
+                    height: document.querySelector('#qrCode').clientHeight,
+                    text: `${window.location.origin}/meeting/${_this.roomNum}`
+                })
+                this.htmlToCanvas()
+            },
+            htmlToCanvas(){
+                html2canvas(document.getElementById('shareContent')).then(canvas => {
+                    this.shareImgUrl = canvas.toDataURL();
+                    this.$refs.shareContent.style.display = 'none'
+                })
+            },
         }
     }
 </script>
@@ -168,6 +205,35 @@
             }
             .iconfont{
                 font-size: 28px;
+            }
+        }
+        .content{
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .qrCode{
+                width:200px;
+                height:200px;
+                background:#ccc;
+                margin:auto;
+            }
+            .topic{
+                margin-top:10px;
+                font-size:16px;
+                color:#333;
+            }
+            .roomNum,.meetingTime{
+                font-size: 14px;
+                color:#999;
+                line-height: 28px;
+            }
+            
+        }
+        .van-dialog{
+            .canvasImg{
+                width:100%;
             }
         }
     }
